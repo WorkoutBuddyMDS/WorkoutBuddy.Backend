@@ -1,5 +1,4 @@
 ﻿using Backend.BusinessLogic.Base;
-using Backend.BusinessLogic.Splits;
 using Backend.Common.DTOs;
 using Backend.Common.Exceptions;
 using Backend.Common.Extensions;
