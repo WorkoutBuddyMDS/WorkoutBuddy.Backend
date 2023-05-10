@@ -69,6 +69,36 @@ namespace Backend.WebApp.Controllers
                 Roles = user.Roles
             });
         }
+        [HttpGet("profilePage")]
+        [Authorize]
+        public IActionResult ProfilePage()
+        {
+            var model = _service.GetUserInfo(CurrentUser.Id);
+            return Ok(model);
+        }
+
+        [HttpGet("getEditProfileModel")]
+        [Authorize]
+        public IActionResult EditProfile()
+        {
+            var model = _service.GetEditModel(CurrentUser.Id);
+            return Ok(model);
+        }
+
+        [HttpPost("editProfile")]
+        [Authorize]
+        public async Task<IActionResult> EditProfile(EditProfileModel model)
+        {
+            _service.EditProfile(model, CurrentUser.Id);
+            /*if (newUsername != CurrentUser.Username)
+            {
+                var user = CurrentUser;
+                await utils.LogOut(HttpContext);
+                user.Username = newUsername;
+                await utils.LogIn(user, HttpContext);
+            }*/
+            return Ok();
+        }
 
         private JwtSecurityToken LogIn(CurrentUserDto user)
         {

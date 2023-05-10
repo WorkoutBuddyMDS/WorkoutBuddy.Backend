@@ -16,11 +16,17 @@ namespace Backend.BusinessLogic.Account
     public class UserAccountService : BaseService
     {
         private readonly RegisterUserValidator RegisterUserValidator;
+        private readonly AddWeightValidator AddWeightValidator;
+        private readonly EditProfileValidator EditProfileValidator;
+        private readonly EditUserProfileValidator EditUserProfileValidator;
 
         public UserAccountService(ServiceDependencies dependencies)
             : base(dependencies)
         {
             RegisterUserValidator = new RegisterUserValidator(UnitOfWork);
+            AddWeightValidator = new AddWeightValidator();
+            EditProfileValidator = new EditProfileValidator(UnitOfWork);
+            EditUserProfileValidator = new EditUserProfileValidator(UnitOfWork);
         }
 
         public async Task<CurrentUserDto> Login(LoginModel model)
@@ -92,6 +98,49 @@ namespace Backend.BusinessLogic.Account
 
 
                 uow.Users.Insert(user);
+
+                uow.SaveChanges();
+            });
+        }
+        public UserInfoModel GetUserInfo(Guid id)
+        {
+            var user = UnitOfWork.Users.Get()
+                        .Include(u => u.UserPointsHistories)
+                        .Include(u => u.UserWeightHistories)
+                        .Include(u => u.Idroles)
+                        .FirstOrDefault(u => u.Iduser == id);
+
+            var userInfo = Mapper.Map<User, UserInfoModel>(user);
+            userInfo.CurrentWeight = (float)user.UserWeightHistories
+                                        .OrderByDescending(u => u.WeighingDate)
+                                        .FirstOrDefault(u => u.Iduser == user.Iduser)
+                                        .Weight;
+
+            return userInfo;
+        }
+
+        public EditProfileModel GetEditModel(Guid id)
+        {
+            var user = UnitOfWork.Users.Get()
+                        .First(u => u.Iduser == id);
+
+            var model = Mapper.Map<User, EditProfileModel>(user);
+            return model;
+        }
+
+        public void EditProfile(EditProfileModel model, Guid id)
+        {
+            ExecuteInTransaction(uow =>
+            {
+                EditProfileValidator.Validate(model).ThenThrow(model);
+
+                var user = UnitOfWork.Users.Get()
+                        .First(u => u.Iduser == id);
+
+                Mapper.Map<EditProfileModel, User>(model, user);
+
+
+                uow.Users.Update(user);
 
                 uow.SaveChanges();
             });
