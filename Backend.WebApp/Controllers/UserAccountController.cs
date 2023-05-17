@@ -100,6 +100,32 @@ namespace Backend.WebApp.Controllers
             return Ok();
         }
 
+        [Authorize("admin")]
+        [HttpPost("getEditUserProfileModel")]
+        public IActionResult EditUserProfile(Guid userId)
+        {
+            var model = _service.GetUserEditModel(userId);
+            return Ok(model);
+        }
+
+        [Authorize("admin")]
+        [HttpPost("editUserProfile")]
+        public async Task<IActionResult> EditUserProfile(EditUserModel model)
+        {
+            _service.EditUserProfile(model);
+            return Ok();
+        }
+
+
+        [Authorize]
+        [HttpPost("changePassword")]
+        public IActionResult ChangePassword([FromBody] PasswordChangeModel model)
+        {
+
+            _service.ChangePassword(model, CurrentUser.Id);
+            return Ok();
+        }
+
         private JwtSecurityToken LogIn(CurrentUserDto user)
         {
             var claims = new List<Claim>

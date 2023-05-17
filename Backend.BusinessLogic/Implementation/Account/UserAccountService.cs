@@ -146,5 +146,88 @@ namespace Backend.BusinessLogic.Account
             });
         }
 
+        public EditUserModel GetUserEditModel(Guid id)
+        {
+            var user = UnitOfWork.Users.Get()
+                        .Include(u => u.Idroles)
+                        .FirstOrDefault(u => u.Iduser == id);
+            if (user == null)
+            {
+                throw new NotFoundErrorException("this user does not exist!");
+            }
+            var userModel = Mapper.Map<User, EditUserModel>(user);
+            userModel.Roles = user.Idroles.Select(r => r.Idrole).ToList();
+            return userModel;
+        }
+
+        public void EditUserProfile(EditUserModel model)
+        {
+            ExecuteInTransaction(uow =>
+            {
+                EditUserProfileValidator.Validate(model).ThenThrow(model);
+
+                var user = uow.Users.Get()
+                        .Include(u => u.Idroles)
+                        .FirstOrDefault(u => u.Iduser == model.UserId);
+
+                Mapper.Map<EditUserModel, User>(model, user);
+                user.Idroles.Clear();
+                foreach (var role in model.Roles)
+                {
+                    var newRole = uow.Roles.Get().FirstOrDefault(r => r.Idrole == role);
+                    user.Idroles.Add(newRole);
+                }
+
+                user.LastModifiedOn = DateTime.Now;
+                uow.Users.Update(user);
+                uow.SaveChanges();
+
+            });
+        }
+
+        public bool ChangePassword(PasswordChangeModel model, Guid currentUserId)
+        {
+            var isValid = true;
+
+            ExecuteInTransaction(uow =>
+            {
+                var user = uow.Users.Get()
+                    .FirstOrDefault(u => u.Iduser == currentUserId);
+
+                var oldPasswordHash = model.OldPassword.HashPassword(user.Salt);
+
+                if (!PasswordRegexTest(model.OldPassword))
+                {
+                    isValid = false;
+                }
+                else if (!PasswordRegexTest(model.NewPassword) || !oldPasswordHash.SequenceEqual(user.Password))
+                {
+                    isValid = false;
+                }
+                else
+                {
+                    var passwordHash = model.NewPassword.HashPassword(user.Salt);
+                    user.Password = passwordHash;
+
+                    uow.Users.Update(user);
+                    uow.SaveChanges();
+                }
+
+            });
+            return isValid;
+        }
+
+        private bool PasswordRegexTest(string password)
+        {
+            if (password == null)
+            {
+                return false;
+            }
+            var pattern = @"(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}";
+            Regex re = new Regex(pattern);
+            var res = re.IsMatch(password);
+            return res;
+        }
+
     }
 }
