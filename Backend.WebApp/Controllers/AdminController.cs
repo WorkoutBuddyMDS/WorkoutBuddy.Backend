@@ -2,6 +2,7 @@
 using Backend.WebApp.Code.Base;
 using Backend.WebApp.Code.Utils;
 using Microsoft.AspNetCore.Mvc;
+using WorkoutBuddy.BusinessLogic.AdminDashboard;
 
 namespace Backend.WebApp.Controllers
 {
@@ -10,9 +11,11 @@ namespace Backend.WebApp.Controllers
     public class AdminController : BaseController
     {
         private readonly ExerciseService _service;
-        public AdminController(ControllerDependencies dependencies, ExerciseService service) : base(dependencies)
+        private readonly AdminService _adminService;
+        public AdminController(ControllerDependencies dependencies, ExerciseService service, AdminService adminService) : base(dependencies)
         {
             _service = service;
+            _adminService = adminService;
         }
 
         [HttpGet("getPendingExercises")]
@@ -21,6 +24,14 @@ namespace Backend.WebApp.Controllers
         {
             var exercises = _service.GetPendingExercises();
             return Ok(exercises);
+        }
+
+        [HttpGet("getAllUsers")]
+        [Authorize("admin")]
+        public IActionResult GetAllUsers()
+        {
+            var list = _adminService.GetUsers();
+            return Ok(list);
         }
     }
 }
