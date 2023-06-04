@@ -6,7 +6,7 @@ Cerințele din barem sunt descrise aici [link](https://app.box.com/notes/4683155
 
 ## Membrii echipei:
 
-[Alexia Aldea](https://github.com/allee15)
-[George Florea](https://github.com/jovialjoker)
-[Sergiu Stanciu](https://github.com/Sergiu44)
-[Dragos Teleaga](https://github.com/dragosteleaga)
+1. [Alexia Aldea](https://github.com/allee15)
+2. [George Florea](https://github.com/jovialjoker)
+3. [Sergiu Stanciu](https://github.com/Sergiu44)
+4. [Dragos Teleaga](https://github.com/dragosteleaga)
