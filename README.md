@@ -12,6 +12,12 @@ Cerințele din barem sunt descrise aici [link](https://app.box.com/notes/4683155
 4. [Dragos Teleaga](https://github.com/dragosteleaga)
 
 ## Descrierea proiectului
+
+Aplicația "Workout Buddy Service" este scrisă în C#, un limbaj de programare puternic, orientat pe obiect, dezvoltat și susținut de Microsoft. C# este frecvent utilizat pentru dezvoltarea aplicațiilor web, serviciilor backend, aplicațiilor desktop și multe altele, având o sintaxă similară cu alte limbaje de programare populare, precum Java și C++.Aplicația "Workout Buddy Service" utilizează și platforma ASP.NET, care este un framework dezvoltat de Microsoft și este frecvent utilizat pentru dezvoltarea aplicațiilor web în limbajul C#.
+
+ASP.NET permite construirea rapidă și scalabilă a aplicațiilor web prin intermediul modelului de programare bazat pe componente. Acesta oferă funcționalități puternice pentru gestionarea rutei, gestionarea cererilor și generarea dinamică a paginilor web.
+
+
 Aplicația "Workout Buddy Service" este o aplicație server backend care furnizează funcționalități esențiale pentru aplicația "Workout Buddy". Iată ce face aplicația:
 
 1. Autentificare și gestionare conturi de utilizator: Aplicația permite utilizatorilor să creeze conturi și să se autentifice în sistem. Aceasta asigură o autentificare securizată și gestionarea conturilor de utilizator, inclusiv crearea, actualizarea și ștergerea acestora.
