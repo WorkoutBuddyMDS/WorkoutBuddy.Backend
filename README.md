@@ -17,17 +17,32 @@ Aplicația "Workout Buddy Service" este scrisă în C#, un limbaj de programare 
 
 ASP.NET permite construirea rapidă și scalabilă a aplicațiilor web prin intermediul modelului de programare bazat pe componente. Acesta oferă funcționalități puternice pentru gestionarea rutei, gestionarea cererilor și generarea dinamică a paginilor web.
 
+### Structura proiectului
+Proiectul este împărțit în mai multe module, care includ:
 
-Aplicația "Workout Buddy Service" este o aplicație server backend care furnizează funcționalități esențiale pentru aplicația "Workout Buddy". Iată ce face aplicația:
+- Backend.BusinessLogic: Acest modul conține logica de afaceri a aplicației. Aici sunt implementate funcționalitățile pentru gestionarea rutinelor de antrenament și a exercițiilor, inclusiv operații de creare, vizualizare, actualizare și ștergere.
 
-1. Autentificare și gestionare conturi de utilizator: Aplicația permite utilizatorilor să creeze conturi și să se autentifice în sistem. Aceasta asigură o autentificare securizată și gestionarea conturilor de utilizator, inclusiv crearea, actualizarea și ștergerea acestora.
+- Backend.Common: Acest modul conține infrastructura comună necesară pentru funcționarea aplicației. Include funcții, clase și alte componente reutilizabile care sunt utilizate în diferite părți ale proiectului.
 
-2. Gestionarea rutinelor de antrenament: Utilizatorii pot crea, vizualiza, actualiza și șterge rutine de antrenament personalizate. Aceasta include adăugarea exercițiilor la rutine, stabilirea numărului de repetări și seturi, precum și planificarea zilelor de antrenament.
+- Backend.DataAccess: Acest modul este responsabil de gestionarea accesului la date. Aici sunt implementate funcționalitățile de interacțiune cu baza de date pentru a stoca și recupera informațiile despre utilizatori, rutinele de antrenament și exercițiile.
 
-3. Gestionarea exercițiilor: Utilizatorii pot adăuga, vizualiza, actualiza și șterge exerciții. Pentru fiecare exercițiu, pot fi specificate detalii precum numele, descrierea, grupa musculară țintă și echipamentul necesar.
+- Backend.Entities: Acest modul definește entitățile și structurile de date utilizate în cadrul aplicației. Aici sunt definite modelele de date pentru utilizatori, rutinele de antrenament, exercițiile și alte obiecte relevante.
 
-4. Jurnalizarea activităților utilizatorului: Aplicația înregistrează activitățile utilizatorilor, cum ar fi adăugarea sau modificarea rutinelor de antrenament, adăugarea exercițiilor sau antrenamentele finalizate. Aceasta poate ajuta utilizatorii să monitorizeze progresul și să-și urmărească activitățile anterioare.
+- Backend.WebApp: Acest modul reprezintă aplicația web propriu-zisă. Aici sunt implementate endpoint-urile și rutele API-ului, gestionarea cererilor HTTP și integrarea cu celelalte module pentru a furniza funcționalitățile aplicației Workout Buddy.
 
-5. Integrare cu o bază de date: Workout Buddy Service se integrează cu o bază de date pentru a stoca și recupera datele utilizatorilor, rutinelor de antrenament și exercițiilor. Acest lucru asigură persistența datelor și accesul rapid la informațiile necesare.
+Funcționalități
+- Autentificare și gestionare conturi de utilizator: Aplicația oferă funcționalități pentru înregistrarea și autentificarea utilizatorilor. Aceasta permite utilizatorilor să creeze conturi, să se autentifice în sistem și să gestioneze informațiile de profil, inclusiv schimbarea parolei.
 
-6. Securitate și autorizare: Aplicația oferă endpoint-uri securizate, care necesită autentificare și autorizare pentru a accesa resursele protejate. Aceasta asigură confidențialitatea și securitatea datelor utilizatorilor și restricționează accesul la anumite funcționalități doar pentru utilizatorii autorizați.
+- Gestionarea rutinelor de antrenament: Utilizatorii pot crea, vizualiza, actualiza și șterge rutine de antrenament personalizate. Aceasta include adăugarea exercițiilor la rutine, stabilirea numărului de repetări și seturi, precum și planificarea zilelor de antrenament.
+
+- Gestionarea exercițiilor: Utilizatorii pot adăuga, vizualiza, actualiza și șterge exerciții. Pentru fiecare exercițiu, pot fi specificate detalii precum numele, descrierea, grupa musculară țintă și echipamentul necesar.
+
+- Jurnalizarea activităților utilizatorului: Aplicația înregistrează activitățile utilizatorilor, cum ar fi adăugarea sau modificarea rutinelor de antrenament, adăugarea exercițiilor sau antrenamentele finalizate. Aceasta poate ajuta utilizatorii să monitorizeze progresul și să-și urmărească activitățile anterioare.
+
+- Securitate și autorizare: Aplicația oferă endpoint-uri securizate, care necesită autentificare și autorizare pentru a accesa resursele protejate. Aceasta asigură confidențialitatea și securitatea datelor utilizatorilor și restricționează accesul la anumite funcționalități doar pentru utilizatorii autorizați.
+
+- Integrare cu o bază de date: Aplicația utilizează un sistem de gestionare a bazelor de date pentru a stoca și recupera datele utilizatorilor, rutinelor de antrenament și exercițiilor. Aceasta asigură persistența datelor și accesul rapid la informațiile necesare.
+
+## Diagrama UML :
+![WhatsApp Image 2023-06-03 at 17 26 37](https://github.com/WorkoutBuddyMDS/workout-buddy.service/assets/91975287/5202c378-db2e-477b-ba09-60add1976250)
+
