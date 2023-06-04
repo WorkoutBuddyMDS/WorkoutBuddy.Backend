@@ -4,7 +4,7 @@ Proiect realizat pentru disciplina "Metode de dezvoltare software" din cadrul Fa
 
 Cerințele din barem sunt descrise aici [link](https://app.box.com/notes/46831554845?s=6ly7x02gnt1i3yyjb5hec4no4narasnu).
 
-##Membrii echipei:
+## Membrii echipei:
 
 [Alexia Aldea](https://github.com/allee15)
 [George Florea](https://github.com/jovialjoker)
