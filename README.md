@@ -48,4 +48,4 @@ Funcționalități
 ![WhatsApp Image 2023-06-03 at 17 26 37](https://github.com/WorkoutBuddyMDS/workout-buddy.service/assets/91975287/5202c378-db2e-477b-ba09-60add1976250)
 
 ## DEMO: 
-[link](https://www.youtube.com/watch?v=31iZq0v-0VA&ab_channel=JovialJoker)
+[Link catre demo](https://www.youtube.com/watch?v=31iZq0v-0VA&ab_channel=JovialJoker)
